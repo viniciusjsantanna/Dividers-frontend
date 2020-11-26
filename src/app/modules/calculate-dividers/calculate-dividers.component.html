@@ -1,0 +1,40 @@
+<div class="col-10 offset-1 fonts">
+    <div class="center">
+        <img src="../../../assets/page-erro.svg" height="350" width="500" alt="img">
+    </div>
+    <div class="center">
+        <h5 class="font">
+            Calculadora de divisores naturais e primos de um número.
+        </h5>
+    </div><br>
+    <form [formGroup]="forms">
+        <div class="row offset-4">
+            <div class="col-4">
+                <input type="text" formControlName="Number" placeholder="Digite um número aqui"
+                    class="input-sm form-control"><br>
+            </div>
+            <div class="col-6">
+                <button class="col-4 btn btn-info" (click)="calculate(forms.value)"
+                    [disabled]="!f.Number.valid">Calcular</button>
+            </div>
+
+        </div>
+    </form>
+    <div class="col-4 offset-4" *ngIf="numbers != undefined">
+        <h2>Resultados:</h2>
+        <hr>
+        <span>Divisores naturais: <br>
+            <span *ngFor="let number of numbers.dividers; last as isLast">
+                {{number}} <span *ngIf="!isLast">X</span>
+            </span>
+            <span class="error" *ngIf="numbers.dividers.length == 0">Não existem divisores!</span>
+        </span><br>
+        <span>Divisores primos: <br>
+            <span *ngFor="let number of numbers.primes; last as isLast">
+                {{number}} <span *ngIf="!isLast">X</span>
+            </span>
+            <span class="error" *ngIf="numbers.primes.length == 0">Não existem divisores!</span>
+        </span>
+    </div>
+
+</div>
