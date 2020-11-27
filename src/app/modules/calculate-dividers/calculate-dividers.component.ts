@@ -8,12 +8,12 @@ import { CalculateDividersService } from './calculate-dividers.service';
   styleUrls: ['./calculate-dividers.component.scss']
 })
 export class CalculateDividersComponent implements OnInit {
-
+  loading: boolean = false;
   forms: FormGroup;
   numbers: any;
   constructor(private formBuilder: FormBuilder, private calculateDividersService: CalculateDividersService) {
     this.forms = this.formBuilder.group({
-      Number: [, [Validators.required, Validators.min(1)]]
+      Number: ['', [Validators.required, Validators.min(1)]]
     });
 
   }
@@ -23,15 +23,17 @@ export class CalculateDividersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.numbers);
   }
 
   calculate(obj){
+    this.loading = true;
     obj.Number = Number(obj.Number);
-    console.log(obj);
+    this.numbers = {};
     this.calculateDividersService.calculate(obj).subscribe((res: any) => {
-      console.log(res);
       this.numbers = res.result;
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
     })
   }
 
