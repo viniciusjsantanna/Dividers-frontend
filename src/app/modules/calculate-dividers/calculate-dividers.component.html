@@ -10,18 +10,26 @@
     <form [formGroup]="forms">
         <div class="row offset-4">
             <div class="col-4">
-                <input type="text" formControlName="Number"
-                    [ngClass]="{'is-invalid': f.Number.dirty && f.Number.errors}" placeholder="Digite um número aqui"
+                <input type="text" formControlName="Name"
+                    [ngClass]="{'is-invalid': f.Name.dirty && f.Name.errors}" placeholder="Digite um número aqui"
                     class="input-sm form-control">
-                <div class="invalid-feedback" *ngIf="f.Number.dirty && f.Number.errors">
-                    <div *ngIf="f.Number.errors.min">Número inválido!</div>
-                    <div *ngIf="f.Number.errors.required">Número é obrigatório!</div>
+                <div class="invalid-feedback" *ngIf="f.Name.dirty && f.Name.errors">
+                    <div *ngIf="f.Name.errors.min">Número inválido!</div>
+                    <div *ngIf="f.Name.errors.required">Número é obrigatório!</div>
                 </div>
             </div>
 
+            <div class="col-4">
+                <select class="form-control input-sm" formControlName="Type">
+                    <option value="">Selecione</option>
+                    <option value={{type.id}} *ngFor="let type of TypeEnum">{{type.description}}</option>
+                </select>
+            </div>
+
+
             <div class="col-6">
                 <button class="col-4 btn btn-info" (click)="calculate(forms.value)"
-                    [disabled]="!f.Number.valid">Calcular</button>
+                    [disabled]="!f.Name.valid">Calcular</button>
             </div>
 
         </div>
